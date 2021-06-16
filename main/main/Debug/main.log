@@ -1,14 +1,6 @@
 ﻿  Board.cpp
   Chess.cpp
-C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\main\Chess.cpp(68,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess\main\main\Chess.cpp(68,21): warning C4018: '<': signed/unsigned mismatch
   main.cpp
-  Pieces.cpp
-C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\main\Pieces.cpp(69,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\main\Pieces.cpp(103,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\main\Pieces.cpp(149,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\main\Pieces.cpp(237,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\main\Pieces.cpp(271,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\main\Pieces.cpp(336,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\main\Pieces.cpp(362,20): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
-  main.vcxproj -> C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_\main\Debug\main.exe
+  main.vcxproj -> C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess\main\Debug\main.exe

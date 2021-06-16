@@ -7,7 +7,7 @@ int main()
     _setmode(_fileno(stdout), _O_U16TEXT);
     Chess obj;
 	std::wcout << "do your move !\n";
-	while (true)
+	while (true) // keeps the game running
 	{
 		obj.ValidateInput();
 		if (obj.InputStatus != Chess::STATUS::INVALID)
