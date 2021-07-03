@@ -1,6 +1,18 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#define Wrook L"\u2656"
+#define Wknight L"\u2658"
+#define Wbishop L"\u2657"
+#define Wking L"\u2654"
+#define Wqueen L"\u2655"
+#define Wpawn L"\u2659"
+#define Brook L"\u265C"
+#define Bknight L"\u265E"
+#define Bbishop L"\u265D"
+#define Bking L"\u265A"
+#define Bqueen L"\u265B"
+#define Bpawn L"\u265F"
 #define WHITE 1
 #define BLACK 0
 //for (int j = 0; j < c.size(); j++)

@@ -1,6 +1,7 @@
 #pragma once
 #include "Board.h"
-#include "Players.h"
+//#include "Players.h"
+//#include "Player.h"
 #include <map>
 class Chess
 {
@@ -10,8 +11,15 @@ protected:
 											   When We Make The Possible Moves*/
 	char cx, tx;
 	std::map<char, int> MAP;
-	Board board;
+	//Player WhitePlayer;
+	//Board board;
+	//Player BlackPlayer(1);
+	//Player WhitePlayer(WHITE);
 public:
+	Player WhitePlayer;
+	Player BlackPlayer;
+	//Player WhitePlayer;
+	Board board;
 	enum class STATUS { VALID, INVALID }; //Input Status
 	enum class ReportStatus {SUCCESSFUL, FAIL, EMPTY}; //Result Of Tying To Move Piece
 	STATUS InputStatus;

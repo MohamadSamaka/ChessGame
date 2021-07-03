@@ -1,7 +1,12 @@
 #include "Chess.h"
 Chess::Chess() {
+	BlackPlayer.SetColor(BLACK);
+	WhitePlayer.SetColor(WHITE);
+	board.InitialInitializer(WhitePlayer.PiecesVec, WhitePlayer.GetColor());
+	board.InitialInitializer(BlackPlayer.PiecesVec, BlackPlayer.GetColor());
 	CopyPosFiller();
 	PossibilitiesFiller();
+	board.BoardPrinter();
 	MAP = { {'A', 0}, {'B', 1} ,{'C', 2} , {'D', 3}, {'E', 4}, {'F', 5}, {'G', 6}, {'H', 7} };
 }
 
