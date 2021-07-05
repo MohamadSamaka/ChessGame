@@ -16,8 +16,8 @@ protected:
 	//Player BlackPlayer(1);
 	//Player WhitePlayer(WHITE);
 public:
-	Player WhitePlayer;
-	Player BlackPlayer;
+	Player WhitePlayer{ 1 };
+	Player BlackPlayer{ 0 };
 	//Player WhitePlayer;
 	Board board;
 	enum class STATUS { VALID, INVALID }; //Input Status

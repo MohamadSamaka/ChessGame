@@ -1,7 +1,7 @@
 #include "Chess.h"
 Chess::Chess() {
-	BlackPlayer.SetColor(BLACK);
-	WhitePlayer.SetColor(WHITE);
+	//BlackPlayer.SetColor(BLACK);
+	//WhitePlayer.SetColor(WHITE);
 	board.InitialInitializer(WhitePlayer.PiecesVec, WhitePlayer.GetColor());
 	board.InitialInitializer(BlackPlayer.PiecesVec, BlackPlayer.GetColor());
 	CopyPosFiller();

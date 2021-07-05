@@ -2,12 +2,13 @@
 #include "Player.h"
 
 Player::Player() {
-	InitialInitializer();
+	//InitialInitializer();
 }
 
-//Player::Player(int color) {
-//	this->color = color;
-//}
+Player::Player(int color) {
+	this->color = color;
+	InitialInitializer();
+}
 
 void Player::SetColor(int color) {
 	this->color = color;

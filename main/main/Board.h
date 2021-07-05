@@ -22,7 +22,8 @@ class Board
 	//Rook rook[4]; Knight knight[4]; Bishop bishop[4]; King king[2]; Queen queen[2]; Pawn pawn[16]; // making the pieces
 public:
 	Board();
-	void InitialInitializer(std::vector<std::vector<Pieces*>>, int color);
+	bool temp = true;
+	void InitialInitializer(std::vector<std::vector<Pieces*>>BPiec, int color);
 	void BoardPrinter();
 	//std::vector<std::vector<Pieces*>> ChessBoard = { {}, {}, {}, {}, {}, {}, {}, {} };
 	std::vector<std::vector<Pieces*>> ChessBoard = { {}, {}, {}, {}, {}, {}, {}, {} };

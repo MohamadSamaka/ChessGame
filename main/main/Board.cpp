@@ -104,10 +104,11 @@ void Board::InitialInitializer(std::vector<std::vector<Pieces*>> pieces, int col
 		for (int i = 0; i < 8; i++)
 			ChessBoard[6].push_back(pieces[5][i]);
 	}
-	for(int i = 2; i < 6; i++)
-		for(int j = 0; j < 8; j++)
-			if(ChessBoard[i].size() < 8)
-				ChessBoard[i].push_back(NULL);
+	if (temp)
+		for(int i = 2; i < 6; i++)
+			for(int j = 0; j < 8; j++)
+					ChessBoard[i].push_back(NULL);
+	temp = false;
 
 
 		//ChessBoard[0].push_back(pieces[i][1]);

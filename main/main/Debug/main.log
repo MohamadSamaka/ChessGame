@@ -1,2 +1,7 @@
 ﻿  Board.cpp
-  main.vcxproj -> C:\Users\TheXJ\Desktop\MyCodes\C++VS\Chess_edited\ChessGame\main\Debug\main.exe
+  Chess.cpp
+C:\Users\TheXJ\Desktop\MyCodes\C++VS\ChessGame\main\main\Chess.cpp(73,21): warning C4018: '<': signed/unsigned mismatch
+  Player.cpp
+  main.cpp
+  Generating Code...
+  main.vcxproj -> C:\Users\TheXJ\Desktop\MyCodes\C++VS\ChessGame\main\Debug\main.exe
