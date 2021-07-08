@@ -10,6 +10,10 @@ void Pieces::SetColor(int color) {
 }
 
 
+int Pieces::GetColor() {
+	return this->color;
+}
+
 std::wstring Pieces::GetName() {
 	return this->name;
 }
@@ -25,7 +29,17 @@ void King::PossibilitiesFiller(int x, int y, std::vector<std::vector<int>> c) {
 		for (int j = x - 1; j <= x + 1; j++) {
 			if (i < 0 || i > 7 || j < 0 || j > 7 || (i == y && j == x))
 				continue;
-			this->PossibleMoves.push_back({ i, j });
+			for(int l = 0; l < c.size(); l++)
+				if(i == c[l][0] && j == c[l][1])
+					if (!ColorChcker(color, c[l][2])) {
+						this->PossibleMoves.push_back({ i, j });
+						break;
+					}
+			 
+			//if (!ColorChcker(color, c[i * 8 + j][2])) {
+				//this->PossibleMoves.push_back({ i, j }); // why this 1 needs prackets to work i have no idea...
+			//this->PossibleMoves.push_back({ i, j });
+
 		}
 }
 
@@ -366,5 +380,12 @@ inline bool Validate(int flip, int var, int FixedNum, std::vector<std::vector<in
 		}
 		else if (c[j][0] == var && c[j][1] == FixedNum)
 			return true;
+	return false;
+}
+
+
+inline bool ColorChcker(int Acolor, int Tcolor) {
+	if (Acolor == Tcolor)
+		return true;
 	return false;
 }

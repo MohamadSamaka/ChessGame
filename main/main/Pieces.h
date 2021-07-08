@@ -26,6 +26,7 @@ public:
 	std::vector<std::vector<int>> PossibleMoves;
 	void SetName(std::wstring name);
 	void SetColor(int color);
+	int GetColor();
 	std::wstring GetName();
 	void PrintName();
 	virtual void PossibilitiesFiller(int y, int x, std::vector<std::vector<int>> c = {}) = 0;
@@ -88,3 +89,5 @@ public:
 
 
 inline bool Validate(int flip, int pos, int FixedNum, std::vector<std::vector<int>> c);
+
+inline bool ColorChcker(int AColor, int TColor);

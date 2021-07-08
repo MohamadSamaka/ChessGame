@@ -2,6 +2,7 @@
 Chess::Chess() {
 	//BlackPlayer.SetColor(BLACK);
 	//WhitePlayer.SetColor(WHITE);
+	GameStart = true;
 	board.InitialInitializer(WhitePlayer.PiecesVec, WhitePlayer.GetColor());
 	board.InitialInitializer(BlackPlayer.PiecesVec, BlackPlayer.GetColor());
 	CopyPosFiller();
@@ -15,7 +16,7 @@ void Chess::CopyPosFiller() {
 	for (int y = 0; y < 8; y++)
 		for (int x = 0; x < 8; x++)
 			if (board.ChessBoard[y][x] != NULL)
-				CopyPos.push_back({ y, x });
+				CopyPos.push_back({ y, x , board.ChessBoard[y][x]->GetColor()});
 }
 
 
@@ -67,7 +68,7 @@ bool Chess::ValidateMove() {
 	Report = ReportStatus::FAIL;
 	if (board.ChessBoard[cy][cx_int] == NULL) {
 		Report = ReportStatus::EMPTY;
-		return false;
+		//return false;
 	}
 	else
 		for (int i = 0; i < board.ChessBoard[cy][cx_int]->PossibleMoves.size(); i++)
