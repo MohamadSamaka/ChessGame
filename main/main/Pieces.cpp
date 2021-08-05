@@ -25,6 +25,13 @@ void Pieces::PrintName() {
 
 
 void King::PossibilitiesFiller(int x, int y, std::vector<std::vector<int>> c) {
+	bool Found = false;
+	//for (int i = y - 1; i <= y + 1; i++)
+	//	for (int j = x - 1; j <= x + 1; j++) {
+	//		if (i < 0 || i > 7 || j < 0 || j > 7 || (i == y && j == x))
+	//			continue;
+	//		this->PossibleMoves.push_back({ i, j });
+	//	}
 	for (int i = y - 1; i <= y + 1; i++)
 		for (int j = x - 1; j <= x + 1; j++) {
 			if (i < 0 || i > 7 || j < 0 || j > 7 || (i == y && j == x))
@@ -33,9 +40,9 @@ void King::PossibilitiesFiller(int x, int y, std::vector<std::vector<int>> c) {
 				if(i == c[l][0] && j == c[l][1])
 					if (!ColorChcker(color, c[l][2])) {
 						this->PossibleMoves.push_back({ i, j });
+						Found = true;
 						break;
 					}
-			 
 			//if (!ColorChcker(color, c[i * 8 + j][2])) {
 				//this->PossibleMoves.push_back({ i, j }); // why this 1 needs prackets to work i have no idea...
 			//this->PossibleMoves.push_back({ i, j });
@@ -293,7 +300,7 @@ void Knight::PossibilitiesFiller(int x, int y, std::vector<std::vector<int>> c) 
 		int Tx[] = { x + i, x - i };
 		for (int c = 0; c <= 1; c++) {
 			if (Tx[c] < 0 || Tx[c] > 7)
-				break;
+				continue;
 			if ((y + j) <= 7)
 				this->PossibleMoves.push_back({ y + j, Tx[c] });
 			if ((y - j) >= 0)

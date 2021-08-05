@@ -17,6 +17,8 @@ void Chess::CopyPosFiller() {
 		for (int x = 0; x < 8; x++)
 			if (board.ChessBoard[y][x] != NULL)
 				CopyPos.push_back({ y, x , board.ChessBoard[y][x]->GetColor()});
+			else
+				CopyPos.push_back({ y, x , -1 });
 }
 
 
@@ -26,7 +28,7 @@ void Chess::ValidateInput() {
 	{
 		std::cin >> cy >> cx >> ty >> tx;
 		cx = toupper(cx); tx = toupper(tx);
-		if (std::cin.fail())
+		if (std::cin.fail()) //the part is important to avoid problems in input
 		{
 			cy = -1;
 			std::cin.clear();

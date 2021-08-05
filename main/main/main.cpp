@@ -2,6 +2,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include "Chess.h"
+//#include <limits>
 int main()
 {
     _setmode(_fileno(stdout), _O_U16TEXT);
