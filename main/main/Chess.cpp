@@ -5,21 +5,21 @@ Chess::Chess() {
 	GameStart = true;
 	board.InitialInitializer(WhitePlayer.PiecesVec, WhitePlayer.GetColor());
 	board.InitialInitializer(BlackPlayer.PiecesVec, BlackPlayer.GetColor());
-	CopyPosFiller();
+	//CopyPosFiller();
 	PossibilitiesFiller();
 	board.BoardPrinter();
 	MAP = { {'A', 0}, {'B', 1} ,{'C', 2} , {'D', 3}, {'E', 4}, {'F', 5}, {'G', 6}, {'H', 7} };
 }
 
 
-void Chess::CopyPosFiller() {
-	for (int y = 0; y < 8; y++)
-		for (int x = 0; x < 8; x++)
-			if (board.ChessBoard[y][x] != NULL)
-				CopyPos.push_back({ y, x , board.ChessBoard[y][x]->GetColor()});
-			else
-				CopyPos.push_back({ y, x , -1 });
-}
+//void Chess::CopyPosFiller() {
+//	for (int y = 0; y < 8; y++)
+//		for (int x = 0; x < 8; x++)
+//			if (board.ChessBoard[y][x] != NULL)
+//				CopyPos.push_back({ y, x , board.ChessBoard[y][x]->GetColor()});
+//			else
+//				CopyPos.push_back({ y, x , -1 });
+//}
 
 
 
@@ -59,7 +59,7 @@ void Chess::PossibilitiesFiller(){
 	for (int y = 0; y < 8; y++)
 		for (int x = 0; x < 8; x++) {
 			if(board.ChessBoard[y][x] != NULL)
-				board.ChessBoard[y][x]->PossibilitiesFiller(x, y, CopyPos);
+				board.ChessBoard[y][x]->PossibilitiesFiller(x, y, board.ChessBoard);
 		}
 }
 
@@ -68,6 +68,7 @@ void Chess::PossibilitiesFiller(){
 bool Chess::ValidateMove() {
 	bool ValidOrNot = false;
 	Report = ReportStatus::FAIL;
+	//std::wcout << board.ChessBoard[cy][cx_int]->PossibleMoves.size();
 	if (board.ChessBoard[cy][cx_int] == NULL) {
 		Report = ReportStatus::EMPTY;
 		//return false;
@@ -88,8 +89,8 @@ void Chess::MovePiece() {
 	board.ChessBoard[ty][tx_int] = board.ChessBoard[cy][cx_int];
 	board.ChessBoard[cy][cx_int] = NULL;
 	board.ChessBoard[ty][tx_int]->PossibleMoves.clear();
-	CopyPos.clear();
-	CopyPosFiller();
+	//CopyPos.clear();
+	//CopyPosFiller();
 	PossibilitiesFiller();
 	//board.ChessBoard[ty][tx_int]->PossibilitiesFiller(tx_int, ty);
 }

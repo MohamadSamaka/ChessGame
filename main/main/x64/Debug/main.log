@@ -1,2 +1,7 @@
-﻿  Chess.cpp
+﻿  Board.cpp
+  Chess.cpp
+  main.cpp
+  Pieces.cpp
+  Player.cpp
+  Generating Code...
   main.vcxproj -> C:\Users\TheXJ\Desktop\MyCodes\C++VS\ChessGame\main\x64\Debug\main.exe

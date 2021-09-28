@@ -29,7 +29,7 @@ public:
 	int GetColor();
 	std::wstring GetName();
 	void PrintName();
-	virtual void PossibilitiesFiller(int y, int x, std::vector<std::vector<int>> c = {}) = 0;
+	virtual void PossibilitiesFiller(int y, int x, std::vector<std::vector<Pieces*>> = {}) = 0;
 };
 
 
@@ -38,7 +38,7 @@ class King :public Pieces
 {
 public:
 	King() {};
-	void PossibilitiesFiller(int y, int x, std::vector<std::vector<int>> c = {})override;
+	void PossibilitiesFiller(int y, int x, std::vector<std::vector<Pieces*>> = {})override;
 };
 
 
@@ -47,7 +47,7 @@ class Queen :public Pieces
 {
 public:
 	Queen() {};
-	void PossibilitiesFiller(int y, int x, std::vector<std::vector<int>> c = {})override;
+	void PossibilitiesFiller(int y, int x, std::vector<std::vector<Pieces*>> = {})override;
 };
 
 
@@ -56,7 +56,7 @@ class Bishop :public Pieces
 {
 public:
 	Bishop() {};
-	void PossibilitiesFiller(int y, int x, std::vector<std::vector<int>> c = {})override;
+	void PossibilitiesFiller(int y, int x, std::vector<std::vector<Pieces*>> = {})override;
 };
 
 
@@ -65,7 +65,7 @@ class Knight :public Pieces
 {
 public:
 	Knight() {};
-	void PossibilitiesFiller(int y, int x, std::vector<std::vector<int>> c = {})override;
+	void PossibilitiesFiller(int y, int x, std::vector<std::vector<Pieces*>> = {})override;
 };
 
 
@@ -74,7 +74,7 @@ class Rook :public Pieces
 {
 public:
 	Rook() {};
-	void PossibilitiesFiller(int y, int x, std::vector<std::vector<int>> c = {})override;
+	void PossibilitiesFiller(int y, int x, std::vector<std::vector<Pieces*>> = {})override;
 };
 
 
@@ -84,7 +84,7 @@ class Pawn:public Pieces
 	bool FirstStep;
 public:
 	Pawn();
-	void PossibilitiesFiller(int y, int x, std::vector<std::vector<int>> c = {})override;
+	void PossibilitiesFiller(int y, int x, std::vector<std::vector<Pieces*>> = {})override;
 };
 
 

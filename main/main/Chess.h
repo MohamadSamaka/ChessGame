@@ -9,8 +9,8 @@ class Chess
 protected:
 	int cy, ty, cx_int, tx_int; //coords variables
 	bool GameStart;
-	std::vector<std::vector<int>>CopyPos = {}; /*Stores The Coords Of Already Exist Pieces, These Coords Gonna Be Avoided
-											   When We Make The Possible Moves*/
+	//std::vector<std::vector<int>>CopyPos = {}; /*Stores The Coords Of Already Exist Pieces, These Coords Gonna Be Avoided
+	//										   When We Make The Possible Moves*/
 	char cx, tx;
 	std::map<char, int> MAP;
 	//Player WhitePlayer;
@@ -28,7 +28,7 @@ public:
 	ReportStatus Report;
 	Chess();
 	void PossibilitiesFiller();
-	void CopyPosFiller();
+	//void CopyPosFiller();
 	bool ValidateMove();
 	void MovePiece();
 	void BoardPrintWithReport();
