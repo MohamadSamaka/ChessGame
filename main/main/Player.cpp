@@ -19,7 +19,7 @@ int Player::GetColor() {
 }
 
 void Player::InitialInitializer() {
-	std::wstring NameOrder[][6] = { {Brook, Bknight, Bbishop, Bking, Bqueen, Bpawn}, {Wrook, Wknight, Wbishop, Wking, Wqueen, Wpawn} };
+	std::wstring NameOrder[][6] = { {Brook, Bknight, Bbishop, Bqueen, Bking, Bpawn}, {Wrook, Wknight, Wbishop, Wqueen, Wking, Wpawn} };
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 2; j++) {
 			switch (i) {
@@ -41,13 +41,13 @@ void Player::InitialInitializer() {
 			}
 		}
 	}
-	PiecesVec[3].push_back(&king);
-	PiecesVec[3][0]->SetColor(color);
-	PiecesVec[3][0]->SetName(NameOrder[color][3]);
-
-	PiecesVec[4].push_back(&queen);
+	PiecesVec[4].push_back(&king);
 	PiecesVec[4][0]->SetColor(color);
 	PiecesVec[4][0]->SetName(NameOrder[color][4]);
+
+	PiecesVec[3].push_back(&queen);
+	PiecesVec[3][0]->SetColor(color);
+	PiecesVec[3][0]->SetName(NameOrder[color][3]);
 
 	for (int i = 0; i < 8; i++) {
 		PiecesVec[5].push_back(&pawn[i]);

@@ -29,9 +29,14 @@ void King::PossibilitiesFiller(int x, int y, std::vector<std::vector<Pieces*>> b
 		for (int j = x - 1; j <= x + 1; j++) {
 			if (i < 0 || i > 7 || j < 0 || j > 7 || (i == y && j == x))
 				continue;
-			if (!ColorChcker(this->color, b[y][2]->GetColor())) {
+
+			if (b[i][j] == NULL) {
 				this->PossibleMoves.push_back({ i, j });
-				break;
+				continue;
+			}
+
+			if (!ColorChcker(this->color, b[i][j]->GetColor())) {
+				this->PossibleMoves.push_back({ i, j });
 			}
 		}
 }
@@ -39,199 +44,243 @@ void King::PossibilitiesFiller(int x, int y, std::vector<std::vector<Pieces*>> b
 
 
 void Queen::PossibilitiesFiller(int x, int y, std::vector<std::vector<Pieces*>> b) {
-	////bishop section
-	//int situation = 0;
-	//std::vector<std::vector<int>> Tvec;
-	//int b, Tx = x, Ty = y;
-	//b = y + x;
-	//while (Tx < 7 && Ty > 0) {
-	//	Tx++; Ty--;
-	//}
+	//////bishop section
 
-	//while (Tx >= 0) {
-	//	Ty = Tx * -1 + b;
-	//	if (Ty >= 8)
-	//		break;
-	//	else if (Ty == y && Tx == x) {
-	//		Tx--;
-	//		situation = 1;
-	//		continue;
-	//	}
-	//	if (Validate(1, Ty, Tx, c) && situation == 0) {
-	//		Tvec.clear();
-	//		Tvec.push_back({ Ty, Tx });
-	//	}
-	//	else if (Validate(1, Ty, Tx, c) && situation == 1) {
-	//		Tvec.push_back({ Ty, Tx });
-	//		break;
-	//	}
-	//	else {
-	//		Tvec.push_back({ Ty, Tx });
-	//	}
-	//	Tx--;
-	//}
+	int Tx = x, Ty = y, color = this->color, tcolor;
+	bool flag = false;
+	while (Tx < 7 && Ty > 0) {
+		Tx++; Ty--;
+		if (b[Ty][Tx] != NULL) {
+			if (ColorChcker(b[Ty][Tx]->GetColor(), color))
+				Tx--; Ty++;
+			break;
+		}
+	}
 
-	//situation = 0;
-	//if (!Tvec.empty())
-	//	for (int i = 0; i < Tvec.size(); i++)
-	//		this->PossibleMoves.push_back(Tvec[i]);
-	//Tvec.clear();
+	while (Tx >= 0 && Ty < 8) {
+		if (b[Ty][Tx] != NULL)
+			tcolor = b[Ty][Tx]->GetColor();
+		if (Tx == x && Ty == y) {
+			flag = true;
+			Tx--; Ty++;
+			continue;
+		}
+
+		if (b[Ty][Tx] == NULL) {///
+			this->PossibleMoves.push_back({ Ty, Tx });
+			Tx--; Ty++;
+			continue;
+		}
+
+		if (b[Ty][Tx] != NULL && !ColorChcker(tcolor, color)) {
+			this->PossibleMoves.push_back({ Ty, Tx });
+			if (flag)
+				break;
+		}
+
+		if (b[Ty][Tx] != NULL && ColorChcker(tcolor, color) && flag)
+			break;
+
+		Tx--; Ty++;
+	}
+
+	flag = false;
+	Tx = x; Ty = y;
+	while (Tx > 0 && Ty > 0) {
+		Tx--; Ty--;
+		if (b[Ty][Tx] != NULL) {
+			if (ColorChcker(b[Ty][Tx]->GetColor(), color))
+				Tx++; Ty++;
+			break;
+		}
+	}
+
+	while (Tx < 8 && Ty < 8) {
+		if (b[Ty][Tx] != NULL)
+			tcolor = b[Ty][Tx]->GetColor();
+		if (Tx == x && Ty == y) {
+			flag = true;
+			Tx++; Ty++;
+			continue;
+		}
+
+		if (b[Ty][Tx] == NULL) {///
+			this->PossibleMoves.push_back({ Ty, Tx });
+			Tx++; Ty++;
+			continue;
+		}
+
+		if (b[Ty][Tx] != NULL && !ColorChcker(tcolor, color)) {
+			this->PossibleMoves.push_back({ Ty, Tx });
+			if (flag)
+				break;
+		}
+
+		if (b[Ty][Tx] != NULL && ColorChcker(tcolor, color) && flag)
+			break;
+
+		Tx++; Ty++;
+	}
 
 
-	//Tx = x, Ty = y;
-	//b = y - x;
-	//while (Tx > 0 && Ty > 0) {
-	//	Tx--; Ty--;
-	//}
+	//rook's section
 
-	//while (Tx <= 7) {
-	//	Ty = Tx + b;
-	//	if (Ty >= 8)
-	//		break;
-	//	else if (Ty == y && Tx == x) {
-	//		Tx++;
-	//		situation = 1;
-	//		continue;
-	//	}
-	//	if (Validate(1, Ty, Tx, c) && situation == 0) {
-	//		Tvec.clear();
-	//		Tvec.push_back({ Ty, Tx });
-	//	}
-	//	else if (Validate(1, Ty, Tx, c) && situation == 1) {
-	//		Tvec.push_back({ Ty, Tx });
-	//		break;
-	//	}
-	//	else
-	//		Tvec.push_back({ Ty, Tx });
-	//	Tx++;
-	//}
+	Tx = x; Ty = y;
+	flag = false;
+	while (Tx > 0) {
+		Tx--;
+		if (b[Ty][Tx] != NULL) {
+			if (ColorChcker(b[Ty][Tx]->GetColor(), color))
+				Tx++;
+			break;
+		}
+	}
+	while (Tx < 8) {
+		if (b[Ty][Tx] != NULL)
+			tcolor = b[Ty][Tx]->GetColor();
 
-	//if (!Tvec.empty())
-	//	for (int i = 0; i < Tvec.size(); i++)
-	//		this->PossibleMoves.push_back(Tvec[i]);
+		if (Tx == x) {
+			Tx++;
+			flag = true;
+			continue;
+		}
 
+		if (b[Ty][Tx] == NULL) {
+			this->PossibleMoves.push_back({ Ty,Tx });
+			Tx++;
+			continue;
+		}
 
-	////rook section
-	//situation = 0;
-	//Tvec.clear();
-	//for (int t = 0; t < 2; t++) {
-	//	if (t == 0) {
-	//		for (int i = 0; i < 8; i++) {
-	//			if (i == x) {
-	//				situation = 1;
-	//				continue;
-	//			}
-	//			if (Validate(0, i, y, c) && situation == 0) {
-	//				Tvec.clear();
-	//				Tvec.push_back({ y, i });
-	//			}
-	//			else if (Validate(0, i, y, c) && situation == 1) {
-	//				Tvec.push_back({ y, i });
-	//				break;
-	//			}
-	//			else
-	//				Tvec.push_back({ y, i });
-	//		}
-	//	}
-	//	else {
-	//		for (int i = 0; i < 8; i++) {
-	//			if (i == y) {
-	//				situation = 1;
-	//				continue;
-	//			}
-	//			if (Validate(1, i, x, c) && situation == 0) {
-	//				Tvec.clear();
-	//				Tvec.push_back({ i, x });
-	//			}
-	//			else if (Validate(1, i, x, c) && situation == 1) {
-	//				Tvec.push_back({ i, x });
-	//				break;
-	//			}
-	//			else
-	//				Tvec.push_back({ i, x });
-	//		}
-	//	}
-	//	situation = 0;
-	//	if (!Tvec.empty())
-	//		for (int i = 0; i < Tvec.size(); i++)
-	//			this->PossibleMoves.push_back(Tvec[i]);
-	//	Tvec.clear();
-	//}
+		if (b[Ty][Tx] != NULL && !ColorChcker(b[Ty][Tx]->GetColor(), color)) {
+			this->PossibleMoves.push_back({ Ty,Tx });
+			if (flag)
+				break;
+		}
+
+		if (b[Ty][Tx] != NULL && ColorChcker(b[Ty][Tx]->GetColor(), color) && flag)
+			break;
+
+		Tx++;
+	}
+	Tx = x; Ty = y;
+	flag = false;
+
+	while (Ty > 0) {
+		Ty--;
+		if (b[Ty][Tx] != NULL) {
+			if (ColorChcker(b[Ty][Tx]->GetColor(), color))
+				Ty++;
+			break;
+		}
+	}
+
+	while (Ty < 8) {
+		if (b[Ty][Tx] != NULL)
+			tcolor = b[Ty][Tx]->GetColor();
+
+		if (Ty == y) {
+			Ty++;
+			flag = true;
+			continue;
+		}
+
+		if (b[Ty][Tx] == NULL) {
+			this->PossibleMoves.push_back({ Ty,Tx });
+			Ty++;
+			continue;
+		}
+
+		if (b[Ty][Tx] != NULL && !ColorChcker(b[Ty][Tx]->GetColor(), color)) {
+			this->PossibleMoves.push_back({ Ty,Tx });
+			if (flag)
+				break;
+		}
+
+		if (b[Ty][Tx] != NULL && ColorChcker(b[Ty][Tx]->GetColor(), color) && flag)
+			break;
+
+		Ty++;
+	}
 }
 
 
 
 void Bishop::PossibilitiesFiller(int x, int y, std::vector<std::vector<Pieces*>> b) {
-	//int situation = 0;
-	//std::vector<std::vector<int>> Tvec;
-	//int b, Tx = x, Ty = y;
-	//b = y + x;
-	//while (Tx < 7 && Ty > 0) {
-	//	Tx++; Ty--;
-	//}
+	int Tx = x, Ty = y, color = this->color, tcolor;
+	bool flag = false;
+	while (Tx < 7 && Ty > 0) {
+		Tx++; Ty--;
+		if (b[Ty][Tx] != NULL) {
+			if (ColorChcker(b[Ty][Tx]->GetColor(), color))
+				Tx--; Ty++;
+			break;
+		}
+	}
 
-	//while (Tx >= 0) {
-	//	Ty = Tx * -1 + b;
-	//	if (Ty >= 8)
-	//		break;
-	//	else if (Ty == y && Tx == x) {
-	//		Tx--;
-	//		situation = 1;
-	//		continue;
-	//	}
-	//	if (Validate(1, Ty, Tx, c) && situation == 0) {
-	//		Tvec.clear();
-	//		Tvec.push_back({ Ty, Tx });
-	//	}
-	//	else if (Validate(1, Ty, Tx, c) && situation == 1) {
-	//		Tvec.push_back({ Ty, Tx });
-	//		break;
-	//	}
-	//	else {
-	//		Tvec.push_back({ Ty, Tx });
-	//	}
-	//	Tx--;
-	//}
+	while (Tx >= 0 && Ty < 8) {
+		if (b[Ty][Tx] != NULL)
+			tcolor = b[Ty][Tx]->GetColor();
+		if (Tx == x && Ty == y) { 
+			flag = true;
+			Tx--; Ty++;
+			continue;
+		}
 
-	//situation = 0;
-	//if (!Tvec.empty())
-	//	for (int i = 0; i < Tvec.size(); i++)
-	//		this->PossibleMoves.push_back(Tvec[i]);
-	//Tvec.clear();
+		if (b[Ty][Tx] == NULL) {///
+			this->PossibleMoves.push_back({ Ty, Tx });
+			Tx--; Ty++;
+			continue;
+		}
 
+		if (b[Ty][Tx] != NULL && !ColorChcker(tcolor, color)) {
+			this->PossibleMoves.push_back({ Ty, Tx });
+			if (flag)
+				break;
+		}
 
-	//Tx = x, Ty = y;
-	//b = y - x;
-	//while (Tx > 0 && Ty > 0) {
-	//	Tx--; Ty--;
-	//}
+		if (b[Ty][Tx] != NULL && ColorChcker(tcolor, color) && flag)
+			break;
 
-	//while (Tx <= 7) {
-	//	Ty = Tx + b;
-	//	if (Ty >= 8)
-	//		break;
-	//	else if (Ty == y && Tx == x) {
-	//		Tx++;
-	//		situation = 1;
-	//		continue;
-	//	}
-	//	if (Validate(1, Ty, Tx, c) && situation == 0) {
-	//		Tvec.clear();
-	//		Tvec.push_back({ Ty, Tx });
-	//	}
-	//	else if (Validate(1, Ty, Tx, c) && situation == 1) {
-	//		Tvec.push_back({ Ty, Tx });
-	//		break;
-	//	}
-	//	else
-	//		Tvec.push_back({ Ty, Tx });
-	//	Tx++;
-	//}
+		Tx--; Ty++;
+	}
 
-	//if (!Tvec.empty())
-	//	for (int i = 0; i < Tvec.size(); i++)
-	//		this->PossibleMoves.push_back(Tvec[i]);
+	flag = false;
+	Tx = x; Ty = y;
+	while (Tx > 0 && Ty > 0) {
+		Tx--; Ty--;
+		if (b[Ty][Tx] != NULL) {
+			if (ColorChcker(b[Ty][Tx]->GetColor(), color))
+				Tx++; Ty++;
+			break;
+		}
+	}
 
+	while (Tx < 8 && Ty < 8) {
+		if (b[Ty][Tx] != NULL)
+			tcolor = b[Ty][Tx]->GetColor();
+		if (Tx == x && Ty == y) {
+			flag = true;
+			Tx++; Ty++;
+			continue;
+		}
+
+		if (b[Ty][Tx] == NULL) {///
+			this->PossibleMoves.push_back({ Ty, Tx });
+			Tx++; Ty++;
+			continue;
+		}
+
+		if (b[Ty][Tx] != NULL && !ColorChcker(tcolor, color)) {
+			this->PossibleMoves.push_back({ Ty, Tx });
+			if (flag)
+				break;
+		}
+
+		if (b[Ty][Tx] != NULL && ColorChcker(tcolor, color) && flag)
+			break;
+
+		Tx++; Ty++;
+	}
 
 }
 
@@ -257,51 +306,82 @@ void Knight::PossibilitiesFiller(int x, int y, std::vector<std::vector<Pieces*>>
 
 
 void Rook::PossibilitiesFiller(int x, int y, std::vector<std::vector<Pieces*>> b) {
-	//int situation = 0;
-	//std::vector<std::vector<int>> Tvec;
-	//for (int t = 0; t < 2; t++) {
-	//	if (t == 0) {
-	//		for (int i = 0; i < 8; i++) {
-	//			if (i == x) {
-	//				situation = 1;
-	//				continue;
-	//			}
-	//			if (Validate(0, i, y, c) && situation == 0) {
-	//				Tvec.clear();
-	//				Tvec.push_back({ y, i });
-	//			}
-	//			else if (Validate(0, i, y, c) && situation == 1) {
-	//				Tvec.push_back({ y, i });
-	//				break;
-	//			}
-	//			else
-	//				Tvec.push_back({ y, i });
-	//		}
-	//	}
-	//	else {
-	//		for (int i = 0; i < 8; i++) {
-	//			if (i == y) {
-	//				situation = 1;
-	//				continue;
-	//			}
-	//			if (Validate(1, i, x, c) && situation == 0) {
-	//				Tvec.clear();
-	//				Tvec.push_back({ i, x });
-	//			}
-	//			else if (Validate(1, i, x, c) && situation == 1) {
-	//				Tvec.push_back({ i, x });
-	//				break;
-	//			}
-	//			else
-	//				Tvec.push_back({ i, x });
-	//		}
-	//	}
-	//	situation = 0;
-	//	if (!Tvec.empty())
-	//		for (int i = 0; i < Tvec.size(); i++)
-	//			this->PossibleMoves.push_back(Tvec[i]);
-	//	Tvec.clear();
-	//}
+	int Tx = x, Ty = y, color = this->color, tcolor;
+	bool flag = false;
+	while (Tx > 0) {
+		Tx--;
+		if (b[Ty][Tx] != NULL) {
+			if (ColorChcker(b[Ty][Tx]->GetColor(), color))
+				Tx++;
+			break;
+		}
+	}
+	while (Tx < 8) {
+		if (b[Ty][Tx] != NULL)
+			tcolor = b[Ty][Tx]->GetColor();
+
+		if (Tx == x) {
+			Tx++;
+			flag = true;
+			continue;
+		}
+
+		if (b[Ty][Tx] == NULL) {
+			this->PossibleMoves.push_back({ Ty,Tx });
+			Tx++;
+			continue;
+		}
+
+		if (b[Ty][Tx] != NULL && !ColorChcker(b[Ty][Tx]->GetColor(), color)) {
+			this->PossibleMoves.push_back({ Ty,Tx });
+			if (flag)
+				break;
+		}
+
+		if (b[Ty][Tx] != NULL && ColorChcker(b[Ty][Tx]->GetColor(), color) && flag)
+			break;
+
+		Tx++;
+	}
+	Tx = x; Ty = y;
+	flag = false;
+
+	while (Ty > 0) {
+		Ty--;
+		if (b[Ty][Tx] != NULL) {
+			if (ColorChcker(b[Ty][Tx]->GetColor(), color))
+				Ty++;
+			break;
+		}
+	}
+
+	while (Ty < 8) {
+		if (b[Ty][Tx] != NULL)
+			tcolor = b[Ty][Tx]->GetColor();
+
+		if (Ty == y) {
+			Ty++;
+			flag = true;
+			continue;
+		}
+
+		if (b[Ty][Tx] == NULL) {
+			this->PossibleMoves.push_back({ Ty,Tx });
+			Ty++;
+			continue;
+		}
+
+		if (b[Ty][Tx] != NULL && !ColorChcker(b[Ty][Tx]->GetColor(), color)) {
+			this->PossibleMoves.push_back({ Ty,Tx });
+			if (flag)
+				break;
+		}
+
+		if (b[Ty][Tx] != NULL && ColorChcker(b[Ty][Tx]->GetColor(), color) && flag)
+			break;
+
+		Ty++;
+	}
 }
 
 
@@ -335,23 +415,19 @@ void Pawn::PossibilitiesFiller(int x, int y, std::vector<std::vector<Pieces*>> b
 }
 
 
-//void PawnPossobilitiesGenerator(std::vector<std::vector<int>> P, int YStep, int XStep) {
+
+
 //
+//inline bool Validate(int flip, int var, int FixedNum, std::vector<std::vector<int>> c){
+//	for (int j = 0; j < c.size() - 1; j++)
+//		if (flip == 0) {
+//			if (c[j][0] == FixedNum && c[j][1] == var)
+//				return true;
+//		}
+//		else if (c[j][0] == var && c[j][1] == FixedNum)
+//			return true;
+//	return false;
 //}
-//
-
-
-
-inline bool Validate(int flip, int var, int FixedNum, std::vector<std::vector<int>> c){
-	for (int j = 0; j < c.size() - 1; j++)
-		if (flip == 0) {
-			if (c[j][0] == FixedNum && c[j][1] == var)
-				return true;
-		}
-		else if (c[j][0] == var && c[j][1] == FixedNum)
-			return true;
-	return false;
-}
 
 
 inline bool ColorChcker(int Acolor, int Tcolor) {
